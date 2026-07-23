@@ -31,8 +31,12 @@ export class EmployeeService {
       });
   }
 
-  updateEmployee(employeeId: Number, employee: Employee, ): Observable<Object>{
+  updateEmployee(employeeId: Number, employee: Employee ): Observable<Object>{
     return this.HttpClient.put<Employee[]>(this.baseURL + "/" + employeeId, employee);
+  }
+
+  deleteEmployee(employeeId: Number): Observable<Object>{
+    return this.HttpClient.delete(this.baseURL + "/" + employeeId);
   }
 
 }
