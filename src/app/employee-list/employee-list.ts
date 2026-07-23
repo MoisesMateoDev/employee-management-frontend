@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { Employee } from '../employee';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
@@ -11,32 +12,39 @@ import { EmployeeService } from '../employee.service';
   templateUrl: './employee-list.html',
   styleUrl: './employee-list.css',
 })
+
+
 export class EmployeeList implements OnInit {
  
-private employeeService = inject(EmployeeService);
-
+  protected readonly title = "Welcome! we are in";
+  protected readonly maintenance = "maintenance";
+  private employeeService = inject(EmployeeService);
+  private router = inject(Router);
 
 // 2. Using a Signal for reactive state management (avoids leak risks)
   employees = signal<Employee[]>([]);
 
   
- ngOnInit(): void {
+ngOnInit(): void {
   this.getEmployees();  
- }
+}
 
+private getEmployees(): void{
+  this.employeeService.getEmployeeList()
+    .subscribe({
+      next: (data: Employee[]) =>  {
+        console.log('Employees:', data);
+        console.log('Is array?', Array.isArray(data));
+        console.log('Length:', data?.length);
 
- private getEmployees(): void{
-    this.employeeService.getEmployeeList().subscribe({
-        next: (data: Employee[]) =>  {
-      console.log('Employees:', data);
-      console.log('Is array?', Array.isArray(data));
-      console.log('Length:', data?.length);
-
-      this.employees.set(data);
-    },
+        this.employees.set(data);
+      },
       error: (err: String) => console.error('Failed to load employees', err)
     });
- }
+}
 
+updateEmployee(id: Number){
+  this.router.navigate(['update-employee', id]);
+}
 
 }

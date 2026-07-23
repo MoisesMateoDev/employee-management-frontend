@@ -8,8 +8,8 @@ import { EmployeeList } from "./employee-list/employee-list";
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
+
 export class App {
-  protected readonly title = "Welcome! we are in";
-  protected readonly maintenance = "maintenance";
+
 }
       
