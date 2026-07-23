@@ -47,4 +47,19 @@ updateEmployee(id: Number){
   this.router.navigate(['update-employee', id]);
 }
 
+deleteEmployee(id: Number){
+  this.employeeService.deleteEmployee(id)
+    .subscribe({
+      next: (data: Object) => {
+        this.employees.update(employees =>
+        employees.filter(employee => employee.id !== id)
+        );
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+  this.router.navigate(['employees']);
+}
+
 }
