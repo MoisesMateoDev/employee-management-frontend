@@ -30,7 +30,8 @@
                         <td>{{ employee.emailId }}</td>
                         <td>
                             <button (click)="updateEmployee(employee.id)" class="btn btn-info"> Update </button>
-                            <button (click)="deleteEmployee(employee.id)" class="btn btn-warning"> Delete </button>
+                            <button (click)="deleteEmployee(employee.id)" class="btn btn-danger"> Delete </button>
+                            <button (click)="viewEmployeeDetails(employee)" class="btn btn-warning"> View </button>
                         </td>
                     </tr>
                 }

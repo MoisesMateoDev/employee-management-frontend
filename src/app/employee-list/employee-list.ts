@@ -3,12 +3,13 @@ import { Employee } from '../employee';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../employee.service';
 import { Router } from '@angular/router';
+import { EmployeeDetails } from '../employee-details/employee-details';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true, // Explicit in older v14/15, default in newer versions
   imports: [CommonModule],
-  providers: [EmployeeService], // <-- Missing if not providedIn: 'root'
+  providers: [EmployeeService, EmployeeDetails], // <-- Missing if not providedIn: 'root'
   templateUrl: './employee-list.html',
   styleUrl: './employee-list.css',
 })
@@ -19,6 +20,7 @@ export class EmployeeList implements OnInit {
   protected readonly title = "Welcome! we are in";
   protected readonly maintenance = "maintenance";
   private employeeService = inject(EmployeeService);
+  private employeeDetails = inject(EmployeeDetails)
   private router = inject(Router);
 
 // 2. Using a Signal for reactive state management (avoids leak risks)
@@ -62,4 +64,7 @@ deleteEmployee(id: Number){
   this.router.navigate(['employees']);
 }
 
+viewEmployeeDetails(employeeDetails: Employee) {
+  this.router.navigate(['employee-details', employeeDetails.id]);
+}
 }
