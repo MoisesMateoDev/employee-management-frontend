@@ -1,0 +1,23 @@
+<div class="container mt-4">
+
+    <h2 class="text-center mb-4">Employee Detailed Information></h2>
+   
+    <div>
+        @for (employee of employees(); track employee.id) {
+            
+            <div>
+                <label> <b> First Name: </b></label> {{employee.firstName}}
+            </div>
+
+            <div>
+                <label> <b> Last Name: </b></label> {{employee.lastName}}
+            </div>
+            
+            <div>
+                <label> <b> Email: </b></label> {{employee.emailId}}
+            </div>
+        
+        } 
+   </div> 
+    
+</div>
